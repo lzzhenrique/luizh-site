@@ -1,6 +1,7 @@
 ---
-// Capa de livro. Se existir um arquivo em public/capas/, usa a imagem;
-// senão gera uma capa provisória (cor derivada do título).
+// Capa de livro. `capa` pode ser um arquivo em public/capas/ ou uma URL.
+// A capa provisória (cor derivada do título) fica sempre por baixo:
+// se a imagem não carregar, ela aparece no lugar.
 interface Props {
   titulo: string;
   autor: string;
@@ -9,13 +10,21 @@ interface Props {
 const { titulo, autor, capa } = Astro.props;
 let hue = 0;
 for (const ch of titulo) hue = (hue * 31 + ch.charCodeAt(0)) % 360;
+const src = capa ? (/^https?:\/\//.test(capa) ? capa : `/capas/${capa}`) : null;
 ---
 
-{capa ? (
-  <img class="cover" src={`/capas/${capa}`} alt="" width="72" height="108" loading="lazy" decoding="async" />
-) : (
-  <div class="cover cover-gen" style={`--h:${hue}`} aria-hidden="true">
-    <b>{titulo}</b>
-    <span>{autor}</span>
-  </div>
-)}
+<div class="cover cover-gen" style={`--h:${hue}`} aria-hidden="true">
+  <b>{titulo}</b>
+  <span>{autor}</span>
+  {src && (
+    <img
+      class="cover-img"
+      src={src}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      referrerpolicy="no-referrer"
+      onerror="this.remove()"
+    />
+  )}
+</div>

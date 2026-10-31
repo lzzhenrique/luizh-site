@@ -2,41 +2,49 @@
   {
     "titulo": "A lógica do Cisne Negro",
     "autor": "Nassim Nicholas Taleb",
-    "status": "quero-ler"
+    "status": "quero-ler",
+    "capa": "https://ciadasletras.vtexassets.com/arquivos/ids/220677/capa-9788547001261.jpg"
   },
   {
     "titulo": "Rápido e devagar",
     "autor": "Daniel Kahneman",
-    "status": "quero-ler"
+    "status": "quero-ler",
+    "capa": "https://covers.openlibrary.org/b/id/15120821-M.jpg"
   },
   {
     "titulo": "Antifrágil",
     "autor": "Nassim Nicholas Taleb",
-    "status": "quero-ler"
+    "status": "quero-ler",
+    "capa": "https://ciadasletras.vtexassets.com/arquivos/ids/220578/capa-9788547001087.jpg"
   },
   {
     "titulo": "O andar do bêbado",
     "autor": "Leonard Mlodinow",
-    "status": "quero-ler"
+    "status": "quero-ler",
+    "capa": "https://ciadasletras.vtexassets.com/arquivos/ids/192455/cdl-9788537801550.jpg"
   },
   {
     "titulo": "O almanaque de Naval Ravikant",
     "autor": "Eric Jorgenson",
-    "status": "quero-ler"
+    "status": "quero-ler",
+    "capa": "https://www.intrinseca.com.br/oalmanaquedenaval/img/livro.png"
   },
   {
     "titulo": "O estrangeiro",
     "autor": "Albert Camus",
-    "status": "quero-ler"
+    "status": "quero-ler",
+    "capa": "https://covers.openlibrary.org/b/id/13135776-M.jpg"
   },
   {
     "titulo": "A arte de fazer acontecer",
     "autor": "David Allen",
-    "status": "quero-ler"
+    "status": "quero-ler",
+    "capa": "https://skoob.s3.amazonaws.com/livros/47113/A_ARTE_DE_FAZER_ACONTECER_144319744647113SK1443197446B.jpg"
   },
   {
     "titulo": "O mítico homem-mês",
     "autor": "Frederick P. Brooks Jr.",
-    "status": "quero-ler"
+    "status": "quero-ler",
+    "capa": "https://skoob.s3.amazonaws.com/livros/67480/O_MTICO_HOMEMMS_ENSAIOS_SOBRE_ENGENHARIA_DE_SOFTWARE_527690826B.jpg"
   }
 ]
