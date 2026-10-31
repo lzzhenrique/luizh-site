@@ -1,0 +1,54 @@
+---
+// Só aparece na prévia (PREVIEW=1). Não vai para o site de verdade.
+const skins = [
+  { id: 'atual', label: 'Atual' },
+  { id: 'marca-texto', label: 'Marca-texto' },
+  { id: 'bancada', label: 'Bancada' },
+  { id: 'terminal', label: 'Terminal' },
+];
+const themes = [
+  { id: 'auto', label: 'Auto' },
+  { id: 'light', label: 'Claro' },
+  { id: 'dark', label: 'Escuro' },
+];
+---
+
+<div class="skin-picker" role="region" aria-label="Escolha de estilo (só na prévia)">
+  <div class="skin-group" role="group" aria-label="Tema">
+    <span class="skin-label">Tema</span>
+    {themes.map((t) => <button type="button" data-theme-set={t.id} aria-pressed="false">{t.label}</button>)}
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var d = document.documentElement;
+    function save() {
+      window.name = 'skin:' + (d.dataset.skin || 'atual') + ';theme:' + (d.dataset.theme || 'auto');
+    }
+    function paint() {
+      var s = d.dataset.skin || 'atual';
+      var t = d.dataset.theme || 'auto';
+      document.querySelectorAll('[data-skin-set]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.skinSet === s));
+      });
+      document.querySelectorAll('[data-theme-set]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.themeSet === t));
+      });
+    }
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('button');
+      if (!b) return;
+      if (b.dataset.skinSet) {
+        if (b.dataset.skinSet === 'atual') delete d.dataset.skin;
+        else d.dataset.skin = b.dataset.skinSet;
+      } else if (b.dataset.themeSet) {
+        if (b.dataset.themeSet === 'auto') delete d.dataset.theme;
+        else d.dataset.theme = b.dataset.themeSet;
+      } else return;
+      save();
+      paint();
+    });
+    paint();
+  })();
+</script>

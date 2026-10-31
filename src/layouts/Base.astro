@@ -1,0 +1,71 @@
+---
+import '@fontsource-variable/newsreader';
+import '@fontsource-variable/ibm-plex-sans';
+import '../styles/global.css';
+import '../styles/identidade.css';
+import SkinPicker from '../components/SkinPicker.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: 'jardim' | 'estante' | 'sobre';
+}
+
+const SITE_NAME = 'Luiz Henrique';
+const { title, description = 'Um jardim digital em crescimento: anotações sobre tecnologia, cozinha e vida.', current } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE_NAME}` : SITE_NAME;
+const preview = process.env.PREVIEW === '1';
+const nav = [
+  { id: 'jardim', href: '/', label: 'Jardim' },
+  { id: 'estante', href: '/estante', label: 'Estante' },
+  { id: 'sobre', href: '/sobre', label: 'Sobre' },
+];
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
+    {preview && (
+      <script is:inline>
+        (function () {
+          var n = window.name || '';
+          var s = /skin:([a-z-]+)/.exec(n);
+          var t = /theme:([a-z]+)/.exec(n);
+          var d = document.documentElement;
+          if (s && s[1] !== 'atual') d.dataset.skin = s[1];
+          if (t && t[1] !== 'auto') d.dataset.theme = t[1];
+        })();
+      </script>
+    )}
+  </head>
+  <body>
+    <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+    <header class="site-header">
+      <a class="wordmark" href="/">{SITE_NAME}</a>
+      <nav aria-label="Principal">
+        <ul>
+          {nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={current === item.id ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+    <main id="conteudo">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>luizh.com · <a href="/rss.xml">RSS</a> · <a href="/icones">ícones e datas</a></p>
+      <p><span class="sr-only">WhatsApp: </span>(00) 00000-0000</p>
+    </footer>
+    {preview && <SkinPicker />}
+  </body>
+</html>

@@ -1,0 +1,6 @@
+node_modules
+dist
+dist-preview
+.astro
+.DS_Store
+preview-launcher.html

@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import StageGlyph from '../components/StageGlyph.astro';
+import { canteiros } from '../lib/garden';
+
+const beds = canteiros();
+---
+
+<Base current="jardim">
+  <section>
+    <h1>Um jardim digital</h1>
+    <p class="lede">
+      Anotações em crescimento sobre tecnologia, cozinha e vida. Algumas ideias estão só plantadas, outras já
+      amadureceram, e todas podem mudar.
+    </p>
+  </section>
+
+  <div class="beds">
+    {beds.map((bed) => (
+      <section class="bed" id={bed.slug} aria-labelledby={`h-${bed.slug}`}>
+        <h2 id={`h-${bed.slug}`}>{bed.label} <span class="count">{bed.notes.length}</span></h2>
+        <ul class="trail">
+          {bed.notes.map((note) => (
+            <li>
+              <StageGlyph stage={note.stage} />
+              <a class="note-title" href={`/notas/${note.slug}`}>{note.title}</a>
+              <p>{note.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Base>

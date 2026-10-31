@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import StageGlyph from '../components/StageGlyph.astro';
+import { STAGES, type Stage } from '../lib/garden';
+
+const stages = Object.keys(STAGES) as Stage[];
+---
+
+<Base title="Ícones e datas" description="O que significam os ícones e as datas deste jardim.">
+  <h1>Ícones e datas</h1>
+  <p class="lede">Isto não é um blog em ordem de data. É um jardim: as notas crescem e mudam com o tempo.</p>
+
+  <section class="legend" aria-label="Estágios">
+    <dl>
+      {stages.map((s) => (
+        <>
+          <dt><StageGlyph stage={s} showLabel /></dt>
+          <dd>{STAGES[s].hint}</dd>
+        </>
+      ))}
+    </dl>
+  </section>
+
+  <p class="prose guide">
+    Os ícones marcam em que ponto está cada nota. A <strong>Mencionada em</strong> no fim de cada nota lista as outras
+    notas que apontam para ela.
+  </p>
+  <p class="prose">
+    A ideia vem do ensaio de Maggie Appleton,
+    <a href="https://maggieappleton.com/garden-history">A Brief History &amp; Ethos of the Digital Garden</a>,
+    em especial a seção "The Six Patterns of Gardening".
+  </p>
+  <p><a href="/">← Jardim</a></p>
+</Base>

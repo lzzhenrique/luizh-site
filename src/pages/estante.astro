@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import BookCover from '../components/BookCover.astro';
+import livros from '../data/livros.json';
+
+type Status = 'lendo' | 'lido' | 'quero-ler';
+type Livro = { titulo: string; autor: string; status: Status; comentario?: string; capa?: string };
+const todos = livros as Livro[];
+const grupos: { status: Status; titulo: string }[] = [
+  { status: 'lendo', titulo: 'Lendo agora' },
+  { status: 'lido', titulo: 'Já li' },
+  { status: 'quero-ler', titulo: 'Quero ler' },
+];
+const porStatus = (s: Status) => todos.filter((l) => l.status === s);
+---
+
+<Base title="Estante" description="Livros que li, estou lendo ou quero ler." current="estante">
+  <h1>Estante</h1>
+  <p class="lede">Livros que li, estou lendo ou quero ler, com uma frase sobre cada um.</p>
+
+  <div class="shelf">
+    {grupos.map((g) => {
+      const itens = porStatus(g.status);
+      if (itens.length === 0) return null;
+      return (
+        <section aria-labelledby={`s-${g.status}`}>
+          <h2 id={`s-${g.status}`}>{g.titulo}</h2>
+          {(
+            <ul class="books">
+              {itens.map((l) => (
+                <li>
+                  <BookCover titulo={l.titulo} autor={l.autor} capa={l.capa} />
+                  <div class="book-info">
+                    <span class="book-title">{l.titulo}</span>
+                    <div class="book-author">{l.autor}</div>
+                    {l.comentario && <p>{l.comentario}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      );
+    })}
+  </div>
+</Base>

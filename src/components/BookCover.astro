@@ -1,0 +1,21 @@
+---
+// Capa de livro. Se existir um arquivo em public/capas/, usa a imagem;
+// senão gera uma capa provisória (cor derivada do título).
+interface Props {
+  titulo: string;
+  autor: string;
+  capa?: string;
+}
+const { titulo, autor, capa } = Astro.props;
+let hue = 0;
+for (const ch of titulo) hue = (hue * 31 + ch.charCodeAt(0)) % 360;
+---
+
+{capa ? (
+  <img class="cover" src={`/capas/${capa}`} alt="" width="72" height="108" loading="lazy" decoding="async" />
+) : (
+  <div class="cover cover-gen" style={`--h:${hue}`} aria-hidden="true">
+    <b>{titulo}</b>
+    <span>{autor}</span>
+  </div>
+)}

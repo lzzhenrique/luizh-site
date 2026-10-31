@@ -1,0 +1,42 @@
+[
+  {
+    "titulo": "A lógica do Cisne Negro",
+    "autor": "Nassim Nicholas Taleb",
+    "status": "quero-ler"
+  },
+  {
+    "titulo": "Rápido e devagar",
+    "autor": "Daniel Kahneman",
+    "status": "quero-ler"
+  },
+  {
+    "titulo": "Antifrágil",
+    "autor": "Nassim Nicholas Taleb",
+    "status": "quero-ler"
+  },
+  {
+    "titulo": "O andar do bêbado",
+    "autor": "Leonard Mlodinow",
+    "status": "quero-ler"
+  },
+  {
+    "titulo": "O almanaque de Naval Ravikant",
+    "autor": "Eric Jorgenson",
+    "status": "quero-ler"
+  },
+  {
+    "titulo": "O estrangeiro",
+    "autor": "Albert Camus",
+    "status": "quero-ler"
+  },
+  {
+    "titulo": "A arte de fazer acontecer",
+    "autor": "David Allen",
+    "status": "quero-ler"
+  },
+  {
+    "titulo": "O mítico homem-mês",
+    "autor": "Frederick P. Brooks Jr.",
+    "status": "quero-ler"
+  }
+]

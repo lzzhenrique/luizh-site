@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+import StageGlyph from '../../components/StageGlyph.astro';
+import { getNotes, backlinksFor, tagSlug, tagLabel } from '../../lib/garden';
+
+export function getStaticPaths() {
+  return getNotes().map((note) => ({ params: { slug: note.slug }, props: { note } }));
+}
+
+const { note } = Astro.props;
+const { Content } = note;
+const backlinks = backlinksFor(note.slug);
+---
+
+<Base title={note.title} description={note.description} current="jardim">
+  <article>
+    <p class="crumb"><a href="/">← Jardim</a></p>
+    <header class="note-head">
+      <h1>{note.title}</h1>
+      <p class="lede summary"><span class="summary-label">Em resumo</span>{note.description}</p>
+      <div class="note-meta">
+        <StageGlyph stage={note.stage} showLabel />
+        <ul class="tags" aria-label="Assuntos">
+          {note.tags.map((tag) => (
+            <li><a href={`/#${tagSlug(tag)}`}>{tagLabel(tag)}</a></li>
+          ))}
+        </ul>
+      </div>
+    </header>
+
+    <div class="note-body prose">
+      <Content />
+    </div>
+  </article>
+
+  <aside class="backlinks" aria-labelledby="mencionada">
+    <h2 id="mencionada">Mencionada em</h2>
+    {backlinks.length === 0 ? (
+      <p class="empty">Nenhuma outra nota aponta para esta ainda.</p>
+    ) : (
+      <ul class="trail">
+        {backlinks.map((b) => (
+          <li>
+            <StageGlyph stage={b.stage} />
+            <a class="note-title" href={`/notas/${b.slug}`}>{b.title}</a>
+            <p>{b.description}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </aside>
+</Base>
